@@ -1,22 +1,18 @@
-import React, { useState } from 'react';
+import React from 'react';
 
-function Track(){
+function Track({ track, onAdd, onRemove, isRemoval}){
 
-    
+    const handleClick = () => {
+        isRemoval ? onRemove(track) : onAdd(track);
+    };
 
     return(
         <div>
             <div>
-                <div id='SongName'>
-
-                </div>
-                <div id='ArtistAndAlbum'>
-
-                </div>
+                <div>{track.name}</div>
+                <div>{track.artist} | {track.album}</div>
             </div>
-            <div id='AddTrackButton'>
-                <button>+</button>
-            </div>
+            <button onClick={handleClick}>{isRemoval ? '-' : '+'}</button>
         </div>
     )
 }

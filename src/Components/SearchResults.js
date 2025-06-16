@@ -1,14 +1,13 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Tracklist from './Tracklist';
+import './SearchResults.css';
 
-function SearchResults(){
-
-
+function SearchResults({ results, onAdd }){
 
     return(
-        <div>
+        <div id='results'>
             <div>Results</div>
-            <Tracklist></Tracklist>
+            <Tracklist tracks={results} onAdd={onAdd} isRemoval={false}></Tracklist>
         </div>
     )
 }
