@@ -1,0 +1,27 @@
+.help-button {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: rgba(0, 0, 0, 0.7);
+    color: white;
+    font-size: 24px;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+  
+    /* Center the "?" inside */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+    transition: background-color 0.3s;
+  }
+  
+  .help-button:hover {
+    background-color: rgba(0, 0, 0, 0.9);
+  }
+  

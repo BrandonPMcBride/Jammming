@@ -1,0 +1,64 @@
+#trackFormat{
+    border-bottom: solid rgb(102, 102, 102);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.add-button,
+.remove-button {
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 999px; /* Fully rounded pill shape */
+  font-size: 16px;
+  cursor: pointer;
+  margin-left: 10px;
+  min-width: 40px;
+  text-align: center;
+}
+
+.add-button {
+  background-color: #1db954;
+}
+
+.add-button:hover {
+  background-color: #1ed760;
+}
+
+.remove-button {
+  background-color: #ff4d4d;
+}
+
+.remove-button:hover {
+  background-color: #e60000;
+}
+
+.minus {
+    width: 12px;
+    height: 2px;
+    background-color: white;
+    margin-top: 5px;
+    margin-bottom: 5px;
+
+}
+.plus {
+    display: grid;
+    place-items: center;
+    
+}
+
+.vert {
+    width: 2px;
+    height: 12px;
+    grid-column: 1;
+    grid-row: 1;
+    background-color: white;
+
+}
+.hor {
+    width: 12px;
+    height: 2px;
+    grid-column: 1;
+    grid-row: 1;
+    background-color: white;
+}

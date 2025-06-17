@@ -5,12 +5,18 @@ import Playlist from './Components/Playlist';
 import './App.css';
 import Spotify from './util/Spotify';
 import { currentToken, userData, logoutClick } from './util/Spotify';
+import HelpBox from './Components/HelpBox';
 
 function App() {
   const [searchResults, setSearchResults] = useState([]);
   const [playlistTracks, setPlaylistTracks] = useState([]);
-  const [playlistName, setPlaylistName] = useState('New Playlist');
+  const [playlistName, setPlaylistName] = useState('');
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  useEffect(()=>{
+    const playlist = playlistTracks.map(v=>v?.id)
+    setSearchResults(s => s.filter(v => !playlist.includes(v?.id) ))
+  }, [playlistTracks])
 
   const addTrack = (track) => {
     if (playlistTracks.find(savedTrack => savedTrack.id === track.id)) return;
@@ -19,6 +25,7 @@ function App() {
 
   const removeTrack = (track) => {
     setPlaylistTracks(prev => prev.filter(t => t.id !== track.id));
+    setSearchResults([track, ...searchResults])
   };
 
   const updatePlaylistName = (name) => {
@@ -90,30 +97,38 @@ function App() {
   }
 
   return (
-    <div id="parentDiv">
-      <div>
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
-          <h1>Jammming</h1>
-          <div>
-            {userData.display_name && <span>Welcome, {userData.display_name}!</span>}
-            <button onClick={logoutClick} style={{ marginLeft: '10px' }}>
-              Logout
-            </button>
-          </div>
+
+    <>
+      <header id="topBar">
+        <div id="appHeader">
+          <h1 id="title">Jammming</h1>
         </div>
-        <SearchBar onSearch={handleSearch} />
-        <SearchResults results={searchResults} onAdd={addTrack} />
+        <div id="loginButton">
+          {userData.display_name && (
+            <span>Welcome, {userData.display_name}!</span>
+          )}
+          <button onClick={logoutClick}>Logout</button>
+        </div>
+      </header>
+
+      <div id="parentDiv">
+        <div id="searchBarStyle">
+          <SearchBar onSearch={handleSearch} />
+          <SearchResults results={searchResults} onAdd={addTrack} />
+        </div>
+        <div id="playlistStyle">
+          <Playlist
+            name={playlistName}
+            tracks={playlistTracks}
+            onRemove={removeTrack}
+            onNameChange={updatePlaylistName}
+            onSave={savePlaylist}
+          />
+          <HelpBox />
+        </div>
       </div>
-      <div>
-        <Playlist
-          name={playlistName}
-          tracks={playlistTracks}
-          onRemove={removeTrack}
-          onNameChange={updatePlaylistName}
-          onSave={savePlaylist}
-        />
-      </div>
-    </div>
+    </>
+
   );
 }
 

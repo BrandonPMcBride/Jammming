@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import './SearchBar.css';
 
 function SearchBar({ onSearch }) {
   const [term, setTerm] = useState('');
@@ -14,6 +15,7 @@ function SearchBar({ onSearch }) {
     <div>
       <form onSubmit={handleSearch}>
         <input
+          type='text'
           placeholder='Enter a song, album, or artist'
           value={term}
           onChange={(e) => setTerm(e.target.value)}
