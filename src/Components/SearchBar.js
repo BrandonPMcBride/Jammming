@@ -5,10 +5,40 @@ function SearchBar({ onSearch }){
 
     const handleSearch = () => {
         //API call goes here
-        const fakeApiCall = [
-            {id: 1, name: 'Firework', artist: "Katy Perry", Album: '???'}
-        ];
-        onSearch(fakeApiCall)
+        const sampleTracks = [
+            {
+              id: 1,
+              name: 'As It Was',
+              artist: 'Harry Styles',
+              album: 'Harry’s House'
+            },
+            {
+              id: 2,
+              name: 'Anti-Hero',
+              artist: 'Taylor Swift',
+              album: 'Midnights'
+            },
+            {
+              id: 3,
+              name: 'First Class',
+              artist: 'Jack Harlow',
+              album: 'Come Home The Kids Miss You'
+            },
+            {
+              id: 4,
+              name: 'About Damn Time',
+              artist: 'Lizzo',
+              album: 'Special'
+            },
+            {
+              id: 5,
+              name: 'Industry Baby',
+              artist: 'Lil Nas X & Jack Harlow',
+              album: 'Montero'
+            }
+          ];
+          
+        onSearch(sampleTracks)
     };
 
     return(
