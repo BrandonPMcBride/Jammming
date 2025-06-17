@@ -10,33 +10,39 @@ function SearchBar({ onSearch }){
               id: 1,
               name: 'As It Was',
               artist: 'Harry Styles',
-              album: 'Harry’s House'
+              album: 'Harry’s House',
+              uri: 'spotify:track:3AsItWas123'
             },
             {
               id: 2,
               name: 'Anti-Hero',
               artist: 'Taylor Swift',
-              album: 'Midnights'
+              album: 'Midnights',
+              uri: 'spotify:track:3AntiHero456'
             },
             {
               id: 3,
               name: 'First Class',
               artist: 'Jack Harlow',
-              album: 'Come Home The Kids Miss You'
+              album: 'Come Home The Kids Miss You',
+              uri: 'spotify:track:3FirstClass789'
             },
             {
               id: 4,
               name: 'About Damn Time',
               artist: 'Lizzo',
-              album: 'Special'
+              album: 'Special',
+              uri: 'spotify:track:3AboutTime321'
             },
             {
               id: 5,
               name: 'Industry Baby',
               artist: 'Lil Nas X & Jack Harlow',
-              album: 'Montero'
+              album: 'Montero',
+              uri: 'spotify:track:3Industry999'
             }
           ];
+          
           
         onSearch(sampleTracks)
     };
