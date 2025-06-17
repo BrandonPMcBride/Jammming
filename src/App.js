@@ -8,7 +8,7 @@ function App() {
 
   const [searchResults, setSearchResults] = useState([]);
   const [playlistTracks, setPlaylistTracks] = useState([]);
-  const [playlistName, setPlaylistName] = useState([]);
+  const [playlistName, setPlaylistName] = useState('');
 
   const addTrack = (track) => {
     if (playlistTracks.find(savedTrack => savedTrack.id === track.id)) return;
@@ -27,7 +27,7 @@ function App() {
     <div id='parentDiv'>
       <div>
       <SearchBar onSearch={setSearchResults}></SearchBar>
-      <SearchResults results={searchResults}></SearchResults>
+      <SearchResults results={searchResults} onAdd={addTrack}></SearchResults>
       </div>
       <div>
         <Playlist
