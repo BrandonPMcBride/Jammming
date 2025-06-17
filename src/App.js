@@ -1,43 +1,61 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import SearchBar from './Components/SearchBar';
 import SearchResults from './Components/SearchResults';
 import Playlist from './Components/Playlist';
-import './App.css'
+import './App.css';
+import Spotify from './util/Spotify';
 
 function App() {
-
   const [searchResults, setSearchResults] = useState([]);
   const [playlistTracks, setPlaylistTracks] = useState([]);
-  const [playlistName, setPlaylistName] = useState('');
+  const [playlistName, setPlaylistName] = useState('New Playlist');
 
   const addTrack = (track) => {
     if (playlistTracks.find(savedTrack => savedTrack.id === track.id)) return;
-    setPlaylistTracks([...playlistTracks, track]);
+    setPlaylistTracks(prev => [...prev, track]);
   };
 
   const removeTrack = (track) => {
-    setPlaylistTracks(playlistTracks.filter(t => t.id !== track.id));
+    setPlaylistTracks(prev => prev.filter(t => t.id !== track.id));
   };
 
   const updatePlaylistName = (name) => {
     setPlaylistName(name);
-  }
+  };
 
   const savePlaylist = () => {
-    const trackURIs = playlistTracks.map(track => track.url);
+    const trackURIs = playlistTracks.map(track => track.uri);
     console.log('Saving playlist...');
     console.log('Name:', playlistName);
     console.log('Track URIs:', trackURIs);
 
-    setPlaylistName('');
+    // Call Spotify.savePlaylist here if you implement it
+    setPlaylistName('New Playlist');
     setPlaylistTracks([]);
-  }
+  };
+
+  const handleSearch = async (term) => {
+    try {
+      const results = await Spotify.search(term);
+      setSearchResults(results);
+    } catch (error) {
+      console.error('Error loading tracks:', error);
+      setSearchResults([]);
+    }
+  };
+
+  useEffect(() => {
+    const token = Spotify.getAccessToken();
+    if (!token) {
+      Spotify.redirectToAuth(); // Automatically redirect if token is missing
+    }
+  }, []);
 
   return (
-    <div id='parentDiv'>
+    <div id="parentDiv">
       <div>
-      <SearchBar onSearch={setSearchResults}></SearchBar>
-      <SearchResults results={searchResults} onAdd={addTrack}></SearchResults>
+        <SearchBar onSearch={handleSearch} />
+        <SearchResults results={searchResults} onAdd={addTrack} />
       </div>
       <div>
         <Playlist
@@ -46,7 +64,7 @@ function App() {
           onRemove={removeTrack}
           onNameChange={updatePlaylistName}
           onSave={savePlaylist}
-        ></Playlist>
+        />
       </div>
     </div>
   );
